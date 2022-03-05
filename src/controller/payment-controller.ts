@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { QueryTypes } from 'sequelize';
 import db from '../config/database.config';
 import { PaymentInstance } from '../model/model-payment';
-
+import { Op } from 'sequelize';
 
  
 
@@ -35,7 +35,7 @@ class PaymentContoller {
         try {
             const startDate = req.body.startDate;
             const endDate = req.body.endDate;
-            const record = await db.query('SELECT * FROM `payment` WHERE `name` LIKE "%' +  + '%"', { type: QueryTypes.SELECT });
+            const record = await db.query('SELECT * FROM `payment` WHERE `date` >=' +startDate+"AND `date` <="  +endDate+ '%"', { type: QueryTypes.SELECT });
             if (record.length !== 0) {
                 return res.json({ record, isSuccess: true });
             }
