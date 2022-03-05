@@ -1,5 +1,5 @@
-# FAF_LMS_API
-learning management system  
+# MED_CARE
+Medical Management System  
 
 # To run Dev server
 npm run dev

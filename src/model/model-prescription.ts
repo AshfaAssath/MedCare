@@ -26,6 +26,7 @@ PrescriptionInstance.init(
             allowNull: false,
 
         }
+    },
     {
         sequelize: db,
         tableName: 'prescription'
