@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { QueryTypes } from 'sequelize';
 import db from '../config/database.config';
 import { PaymentInstance } from '../model/model-payment';
-import { getUserObj } from './util/user-details';
 
 
  

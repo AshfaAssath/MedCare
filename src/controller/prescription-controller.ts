@@ -2,12 +2,10 @@ import { Request, Response } from 'express';
 import { QueryTypes } from 'sequelize';
 import db from '../config/database.config';
 import { PrescriptionInstance } from '../model/model-prescription';
-import { getUserObj } from './util/user-details';
 
 class PrescriptionContoller { 
     async createPrescription(req: Request, res: Response) {
         try{
-            const user = await getUserObj(req);
             const record = await PrescriptionInstance.create({ ...req.body});
             return res.json({ record, msg: 'Successfully created..', isSuccess: true });
         }

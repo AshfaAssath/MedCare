@@ -32,3 +32,4 @@ PrescriptionInstance.init(
         tableName: 'prescription'
     }
 );
+

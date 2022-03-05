@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import { UserInstance } from '../model/model-user';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import * as dotenv from 'dotenv';
-import { getUserObj } from './util/user-details';
 import { where } from 'sequelize/types';
 
 dotenv.config();
@@ -12,10 +10,8 @@ class UserController{
 
     async addUser(req: Request, res: Response) {
         try{
-            const user = await getUserObj(req);
             const hashPW = await bcrypt.hash(req.body.password, 10);
-            console.log(hashPW, "hashPW");
-            const record = await UserInstance.create({ ...req.body, password: hashPW, createBy: user.userId })
+            const record = await UserInstance.create({ ...req.body, password: hashPW })
 
             return res.json({ record, success: true, msg: 'Successfully created..', isSuccess: true})
         }
@@ -35,17 +31,7 @@ class UserController{
                     const isValidUser = await bcrypt.compare(password, record.getDataValue('password'))
                     if(isValidUser) {
                         const user = { userName:userName, userId: record.getDataValue('id')}
-                        let key: any;
-                        key = process.env.ACCESS_TOKEN_SECRET
-                        const accessToken = jwt.sign(user, key, { expiresIn: '15d' })
-                        try{
-                            await record.update({ token: accessToken });
-                        }
-                        catch(e){
-                            console.log(e)
-                            return res.json(e)
-                        }
-                        return res.json({ record, succuss: true, accessToken: accessToken });
+                        return res.json({ record, succuss: true });
                     }
                     else{
                         return res.json({ success: false, msg: ' User name or password is incorrect '})

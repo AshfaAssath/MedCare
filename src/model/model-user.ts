@@ -18,11 +18,6 @@ UserInstance.init(
             unique: true,
             allowNull: false
         },
-        token: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: null
-        },
         password: {
             type: DataTypes.STRING,
             allowNull: false

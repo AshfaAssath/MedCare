@@ -2,12 +2,10 @@ import { Request, Response } from 'express';
 import { QueryTypes } from 'sequelize';
 import db from '../config/database.config';
 import { PatientInstance } from '../model/model-patient';
-import { getUserObj } from './util/user-details';
 
 class PatientContoller { 
     async addPatient(req: Request, res: Response) {
         try{
-            const user = await getUserObj(req);
             const record = await PatientInstance.create({ ...req.body});
             return res.json({ record, msg: 'Successfully created..', isSuccess: true });
         }

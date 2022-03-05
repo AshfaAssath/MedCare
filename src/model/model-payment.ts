@@ -17,7 +17,7 @@ PaymentInstance.init(
             type: DataTypes.DATEONLY,
             allowNull: false,
         },
-        prescrption_id: {
+        patient_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
